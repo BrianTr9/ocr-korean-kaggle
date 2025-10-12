@@ -146,31 +146,33 @@ python3 ocr_eval_20250903.py ORIGINAL_TEXT/texts_hyecho/TAF20161_00.txt.text sub
 
 Example aggregated summary (from a sample run)
 
+```text
 📊 Overall OCR Evaluation Summary
 =====================================
 Blocks parsed:                17
 
 Character-level (micro)
-  GT chars:                   5751
-  OCR chars:                  5669
-  Total edit errors:          1458
-  CER:                        25.35%
-  Accuracy:                   74.65%
-  Precision (est):            84.67%
-  Recall (est):               83.46%
-  F1 (est):                   84.06%
+	GT chars:                   5751
+	OCR chars:                  5669
+	Total edit errors:          1458
+	CER:                        25.35%
+	Accuracy:                   74.65%
+	Precision (est):            84.67%
+	Recall (est):               83.46%
+	F1 (est):                   84.06%
 
 Line-level (micro)
-  GT lines:                   317
-  OCR lines:                  470
-  Aligned/matched lines:      284
-  Precision:                  60.43%
-  Recall:                     89.59%
-  F1:                         72.17%
+	GT lines:                   317
+	OCR lines:                  470
+	Aligned/matched lines:      284
+	Precision:                  60.43%
+	Recall:                     89.59%
+	F1:                         72.17%
 -------------------------------------
 🏆 Overall Score (Balanced):     73.40
 	(Calculated as sqrt(Char Accuracy * Line F1))
 -------------------------------------
+```
 
 ## Known limitations & notes
 
@@ -179,19 +181,5 @@ Line-level (micro)
 - Spelling correction or language-model-based postprocessing is not included by default; a spellfixer could be added as an optional postprocessing step.
 - The deduplication heuristics (SequenceMatcher + confidence) are conservative and tuned for overlapping chunking. You may need to adjust `overlap` and `lcs_threshold` for different datasets.
 
-
-## 👤 Author
-
-**Truong Trung Bao (Brian)**  
-Computer Science @ HCMUT-VNU
-Software Engineering Honours @ UQ  
-
----
-
-## 📜 License
-
-Educational purposes - Free to use with attribution
-
----
 
 *Last Updated: October 2025*
