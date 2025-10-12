@@ -2,7 +2,6 @@
 ORIGINAL_IMAGE/
 ORIGINAL_TEXT/
 submission/
-OFFICIAL_TEST/
 otherVersion/
 
 # Python cache files
@@ -38,3 +37,6 @@ Thumbs.db
 # Output files
 *.txt
 *.log
+
+# Allow requirements file to be committed
+!requirements.txt
