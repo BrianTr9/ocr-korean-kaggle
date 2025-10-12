@@ -23,7 +23,7 @@ class OCRConfig:
     """Centralized configuration for OCR pipeline"""
     
     # Directories
-    input_dir: str = "TEST_FOR_PHASE1"
+    input_dir: str = "OFFICIAL_TEST"
     output_dir: str = "submission"
     use_gpu: bool = True
 
