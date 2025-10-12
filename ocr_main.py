@@ -28,8 +28,8 @@ class OCRConfig:
     use_gpu: bool = True
 
     # Debug & Logging Controls
-    enable_debug_images: bool = True   # Generate debug chunk images 
     enable_verbose_logging: bool = True  # Show preprocessing details
+    enable_debug_images: bool = False   # Generate debug chunk images 
     debug_images_dir: str = "debug_chunks"  # Directory for debug images
     
     # Chunking
@@ -38,11 +38,11 @@ class OCRConfig:
     
     # Deduplication
     enable_deduplication: bool = True  # Default off to preserve baseline evaluation
-    lcs_threshold: float = 0.40
+    lcs_threshold: float = 0.42
 
     # Text Size & Scaling
     min_text_px: int = 18
-    max_scale: float = 3.5
+    max_scale: float = 2.5
     max_dimension: int = 3000
     
     # Text Detection Thresholds
@@ -576,31 +576,25 @@ class OCRProcessor:
         # Compute similarity ratio using SequenceMatcher (fast, low memory)
         ratio = SequenceMatcher(None, prev_line_text, curr_line_text).ratio()
 
-        # Combine ratio with confidence information to reduce false removals
-        # Normalize confidence difference into [-1,1]
-        conf_diff = 0.0
-        try:
-            conf_diff = (curr_conf - prev_conf) / (max(prev_conf, curr_conf, 1e-6))
-        except Exception:
-            conf_diff = 0.0
-
-        # Weighted score: prefer similarity but give some weight to confidence difference
-        weighted_score = 0.9 * ratio + 0.1 * (1.0 - max(0.0, -conf_diff))
+        # Weighted score: prefer similarity but give some weight to absolute confidence difference
+        weighted_score = 0.9 * ratio + 0.2 * abs(curr_conf - prev_conf)
 
         print(f"         Sim ratio: {ratio:.3f}, prev_conf={prev_conf:.3f}, curr_conf={curr_conf:.3f}, weighted={weighted_score:.3f} (threshold: {self.config.lcs_threshold})")
 
         if weighted_score >= self.config.lcs_threshold:
-            # Remove the line with lower average confidence; fall back to shorter length
-            if curr_conf < prev_conf:
-                return 2
-            elif prev_conf < curr_conf:
-                return 1
-            else:
-                # same confidence -> remove shorter (fewer chars)
+            # If confidences are nearly identical, prefer to keep the longer line
+            if abs(curr_conf - prev_conf) < 0.01:
+                # keep longer line, so remove the shorter
                 if len(prev_line_text) < len(curr_line_text):
                     return 1
                 else:
                     return 2
+
+            # Otherwise remove the line with lower average confidence
+            if curr_conf < prev_conf:
+                return 2
+            elif prev_conf < curr_conf:
+                return 1
 
         print(f"      ✅ No duplicate found")
         return 0
