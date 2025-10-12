@@ -183,7 +183,8 @@ Line-level (micro)
 ## 👤 Author
 
 **Truong Trung Bao (Brian)**  
-Now: Computer Science @ HCMUT-VNU → Software Engineering Honours @ UQ  
+Computer Science @ HCMUT-VNU
+Software Engineering Honours @ UQ  
 
 ---
 
