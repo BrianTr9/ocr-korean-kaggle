@@ -72,28 +72,28 @@ Example aggregated summary (from a sample run)
 ```text
 📊 Overall OCR Evaluation Summary
 =====================================
-Blocks parsed:                17
+Blocks parsed:                20
 
 Character-level (micro)
-	GT chars:                   5751
-	OCR chars:                  5669
-	Total edit errors:          1458
-	CER:                        25.35%
-	Accuracy:                   74.65%
-	Precision (est):            84.67%
-	Recall (est):               83.46%
-	F1 (est):                   84.06%
+  GT chars:                   10938
+  OCR chars:                  10782
+  Total edit errors:          1065
+  CER:                        9.74%
+  Accuracy:                   90.26%
+  Precision (est):            92.52%
+  Recall (est):               91.20%
+  F1 (est):                   91.85%
 
 Line-level (micro)
-	GT lines:                   317
-	OCR lines:                  470
-	Aligned/matched lines:      284
-	Precision:                  60.43%
-	Recall:                     89.59%
-	F1:                         72.17%
+  GT lines:                   383
+  OCR lines:                  550
+  Aligned/matched lines:      372
+  Precision:                  67.64%
+  Recall:                     97.13%
+  F1:                         79.74%
 -------------------------------------
-🏆 Overall Score (Balanced):     73.40
-	(Calculated as sqrt(Char Accuracy * Line F1))
+🏆 Overall Score (Balanced):     84.84
+   (Calculated as sqrt(Char Accuracy * Line F1))
 -------------------------------------
 ```
 
