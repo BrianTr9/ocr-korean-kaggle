@@ -60,8 +60,9 @@ Notes:
 
 - Practical pipeline tuned for Korean product images.
 - Overlap-based chunking + conservative deduplication to reduce duplicated lines.
-- Configurable preprocessing pipeline (text-size-aware upscaling, contrast heuristics).
+- Adaptive preprocessing pipeline (text-size-aware upscaling, contrast heuristics).
 - Evaluation tooling for per-file and batch metrics (CER, line-level precision/recall/F1, balanced score).
+- GPU support with automatic CPU fallback for EasyOCR processing.
 
 ## Evaluation
 
@@ -111,7 +112,7 @@ High-level flow inside `ocr_main.py`:
 1. Read batch (traverse input image folders)
 2. Open each image file
 3. Chunk image vertically into overlapping windows
-4. Preprocess each chunk (resize, denoise, upscale, contrast adjust, sharpen)
+4. Adaptively preprocess each chunk (resize, denoise, upscale, contrast adjust, sharpen)
 5. Run OCR (EasyOCR) on preprocessed chunk
 6. Map detected bounding boxes back to original coordinates and group detections into logical lines (by Y-coordinate)
 7. Deduplicate overlapping lines across adjacent chunks using similarity + confidence heuristics
