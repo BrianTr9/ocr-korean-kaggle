@@ -48,8 +48,8 @@ class OCRConfig:
     # Text Detection Thresholds
     min_text_height: int = 8
     max_text_height: int = 300
-    min_text_width: int = 5
-    min_area_ratio: float = 0.25
+    min_text_width: int = 6
+    min_area_ratio: float = 0.45
     
     # Contrast Thresholds
     bright_threshold: int = 235
